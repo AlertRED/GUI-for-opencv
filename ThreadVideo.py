@@ -1,3 +1,4 @@
+import os
 
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import pyqtSignal, QThread, Qt
@@ -40,13 +41,13 @@ class Thread(QThread):
         count_frames = 0
         currient_overlay_frequency = 0
         time.sleep(2.0)
-
         if self.pathsave:
             frame_width = int(cap.get(3))
             frame_height = int(cap.get(4))
-            if self.pathsave[-4::-1] == 'avi':
+            filename, format = os.path.splitext(self.pathsave)
+            if format == '.avi':
                 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-            elif self.pathsave[-4::-1] == 'mp4':
+            elif format == '.mp4':
                 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             out = cv2.VideoWriter(self.pathsave, fourcc, 5, (frame_width, frame_height))
 

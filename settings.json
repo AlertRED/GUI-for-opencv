@@ -184,8 +184,8 @@
         },
         {
             "name": "persone",
-            "border_size": 2,
-            "text_size": 2,
+            "border_size": 1,
+            "text_size": 1,
             "color": [
                 255,
                 0,
