@@ -82,7 +82,7 @@ class Settings(object):
 
 
 if __name__ == '__main__':
-    s = Settings('settings.json')
+    s = Settings('config/settings.json')
     s.default()
     # s.save_json()
     print({key['name']: 0 for key in s.CLASSES})

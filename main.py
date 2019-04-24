@@ -2,13 +2,11 @@
 import sys
 import os
 # Импортируем наш интерфейс из файла
-import MainWindow
-import OpenSaveWindow
-import SettingsWindow
-from PyQt5 import QtCore, QtGui, QtWidgets
+from view import MainWindow, OpenSaveWindow, SettingsWindow
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import qApp, QFileDialog, QStyleFactory
 from PyQt5.QtGui import QTextCursor, QImage, QPixmap, QStandardItemModel
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QThread, Qt
+from PyQt5.QtCore import pyqtSlot, Qt
 from settings import Settings
 from ThreadVideo import Thread
 import matplotlib.ticker as ticker
@@ -22,7 +20,7 @@ class STGWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         self.parent_settings = parent_settings
-        self.settings = Settings('settings.json')
+        self.settings = Settings('config/settings.json')
         self.settings.load_json()
 
         self.ui.pushButton_2.clicked.connect(self.close)
@@ -114,11 +112,12 @@ class OSWindow(QtWidgets.QMainWindow):
         self.vebcam = False
 
     def loadfile(self):
-        self.pathOpen = QFileDialog.getOpenFileName(self, 'Open file', 'C:\\Users\\Александр\\PycharmProjects\\diplom', "Viseo files (*.mp4 *.avi)")[0]
+        print(1)
+        self.pathOpen = QFileDialog.getOpenFileName(self, 'Open file', os.getcwd()+'/video', "Video files (*.mp4 *.avi)")[0]
         self.ui.lineEdit.setText(self.pathOpen)
 
     def savefile(self):
-        self.pathSave = QFileDialog.getSaveFileName(self, 'Open file', 'c:\\', "Viseo file (*.mp4);; Viseo file (*.avi)")[0]
+        self.pathSave = QFileDialog.getSaveFileName(self, 'Open file', os.getcwd()+'/video', "Video file (*.mp4);; Video file (*.avi)")[0]
         self.ui.lineEdit_2.setText(self.pathSave)
 
     def accept(self):
@@ -171,7 +170,7 @@ class MyWin(QtWidgets.QMainWindow):
 
         self.ui.MplWidget.canvas.draw()
 
-        self.settings = Settings('settings.json')
+        self.settings = Settings('config/settings.json')
         self.settings.load_json()
         self.accessLabelVideo = True
         self.pathOpen = None
@@ -179,8 +178,8 @@ class MyWin(QtWidgets.QMainWindow):
         self.vebcam = None
         self.isSave = None
         self.stateVideo = 0
-        self.prototx = 'MobileNetSSD_deploy.prototxt.txt'
-        self.caffemodel = 'MobileNetSSD_deploy.caffemodel'
+        self.prototx = 'config/MobileNetSSD_deploy.prototxt.txt'
+        self.caffemodel = 'config/MobileNetSSD_deploy.caffemodel'
 
     def button_pause(self):
         self.stateVideo = 2
@@ -242,9 +241,11 @@ class MyWin(QtWidgets.QMainWindow):
         self.ui.label.setPixmap(QPixmap.fromImage(image))
         self.accessLabelVideo = True
 
-    @pyqtSlot(str)
-    def print_log(self, value):
+    @pyqtSlot(str, bool)
+    def print_log(self, value, is_clear: bool = False):
         self.ui.plainTextEdit.moveCursor(QTextCursor.End)
+        if is_clear:
+            self.ui.plainTextEdit.clear()
         if type(value) is dict:
             for key, value in value.items():
                 self.ui.plainTextEdit.insertPlainText('\n[%s]: %s' % (key, value))
@@ -263,7 +264,8 @@ class MyWin(QtWidgets.QMainWindow):
 
 
 if __name__ == "__main__":
-    os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = "C:\\Users\\Александр\\PycharmProjects\\diplom\\venv\\Lib\\site-packages\\PyQt5\\Qt\\plugins\\platforms"
+    # os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = "C:\\Users\\Александр\\PycharmProjects\\diplom\\venv\\Lib\\site-packages\\PyQt5\\Qt\\plugins\\platforms"
+    os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = os.getcwd()+"\\venv\\Lib\\site-packages\\PyQt5\\Qt\\plugins\\platforms"
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle(QStyleFactory.create('Fusion'))
     myapp = MyWin()

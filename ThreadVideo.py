@@ -11,9 +11,8 @@ from settings import Settings
 class Thread(QThread):
     changePixmap = pyqtSignal(QImage)
     changeStatic = pyqtSignal(dict, int)
-    printLog = pyqtSignal(str)
+    printLog = pyqtSignal(str, bool)
     clearPixmap = pyqtSignal()
-
 
     prototxt = None
     size_text = None
@@ -32,10 +31,10 @@ class Thread(QThread):
 
 
     def run(self):
-        self.printLog.emit("[INFO] Загрузка моделей...")
+        self.printLog.emit("[INFO] Загрузка моделей...", True)
         net = cv2.dnn.readNetFromCaffe(self.prototxt, self.model)
 
-        self.printLog.emit("[INFO] Инициализация видеопотока...")
+        self.printLog.emit("[INFO] Инициализация видеопотока...", False)
         cap = cv2.VideoCapture(self.pathopen)
 
         count_frames = 0
