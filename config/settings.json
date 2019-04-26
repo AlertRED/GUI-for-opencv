@@ -184,14 +184,14 @@
         },
         {
             "name": "persone",
-            "border_size": 1,
-            "text_size": 1,
+            "border_size": 2,
+            "text_size": 2,
             "color": [
                 255,
                 0,
                 0
             ],
-            "confidence": 0.8,
+            "confidence": 0.6499999999999999,
             "enabled": true
         },
         {
@@ -240,7 +240,7 @@
                 0
             ],
             "confidence": 0.8,
-            "enabled": false
+            "enabled": true
         },
         {
             "name": "tvmonitor",

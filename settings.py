@@ -4,7 +4,7 @@ import json
 class Settings(object):
     filename: str
     overlay_frequency = None
-    CLASSES: dict
+    CLASSES: list
     size_text = None
 
     def __repr__(self):

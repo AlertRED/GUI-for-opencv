@@ -29,7 +29,6 @@ class Thread(QThread):
         self.size_text = settings.size_text
         self.overlay_frequency = settings.overlay_frequency
 
-
     def run(self):
         self.printLog.emit("[INFO] Загрузка моделей...", True)
         net = cv2.dnn.readNetFromCaffe(self.prototxt, self.model)
@@ -82,9 +81,11 @@ class Thread(QThread):
                                 (startX, startY, endX, endY) = box.astype("int")
 
                                 label = "{}: {:.1f}%".format(name, confidence * 100)
-                                cv2.rectangle(frame, (startX, startY), (endX, endY), color, self.CLASSES[idx].get('border_size'))
+                                cv2.rectangle(frame, (startX, startY), (endX, endY), color,
+                                              self.CLASSES[idx].get('border_size'))
                                 y = startY - 15 if startY - 15 > 15 else startY + 15
-                                cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, self.size_text, color, self.CLASSES[idx].get('text_size'))
+                                cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, self.size_text, color,
+                                            self.CLASSES[idx].get('text_size'))
                         except IndexError:
                             pass
 
@@ -92,7 +93,8 @@ class Thread(QThread):
                         out.write(frame)
 
                     rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                    convertToQtFormat = QImage(rgbImage.data, rgbImage.shape[1], rgbImage.shape[0], QImage.Format_RGB888)
+                    convertToQtFormat = QImage(rgbImage.data, rgbImage.shape[1], rgbImage.shape[0],
+                                               QImage.Format_RGB888)
                     p = convertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
 
                     self.changeStatic.emit(self.total_counts, count_frames)

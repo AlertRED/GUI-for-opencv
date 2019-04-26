@@ -12,6 +12,9 @@ from ThreadVideo import Thread
 import matplotlib.ticker as ticker
 
 
+#
+# Класс настроек программы
+#
 class STGWindow(QtWidgets.QMainWindow):
 
     def __init__(self, parent_settings, parent=None, callback=None):
@@ -79,7 +82,9 @@ class STGWindow(QtWidgets.QMainWindow):
         self.ui.spinBox_2.setValue(info['text_size'])
         self.ui.doubleSpinBox.setValue(info['confidence'])
 
-
+#
+# Класс начальных параметров программы
+#
 class OSWindow(QtWidgets.QMainWindow):
 
     def __init__(self, parent=None, callback=None):
@@ -132,8 +137,14 @@ class OSWindow(QtWidgets.QMainWindow):
             self.ui.pushButton_3.setEnabled(False)
             self.ui.lineEdit_2.setEnabled(False)
 
-
+#
+# Класс основного окна программы
+#
 class MyWin(QtWidgets.QMainWindow):
+
+    VIDEO_START = 0
+    VIDEO_PAUSE = 1
+    VIDEO_STOP = 2
 
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -185,7 +196,7 @@ class MyWin(QtWidgets.QMainWindow):
         self.stateVideo = 2
 
     def button_play(self):
-        self.stateVideo = 1
+        self.__start_playing_video()
 
     def button_stop(self):
         self.stateVideo = 0
@@ -198,7 +209,7 @@ class MyWin(QtWidgets.QMainWindow):
         self.myapp = STGWindow(self.settings, self)
         self.myapp.show()
 
-    def action_3_trigger(self):
+    def __start_playing_video(self):
         if self.stateVideo == 0:
             if not self.pathOpen and not self.vebcam:
                 QtWidgets.QMessageBox.about(self, "Ошибка", "Не указан источник")
@@ -217,6 +228,10 @@ class MyWin(QtWidgets.QMainWindow):
         else:
             QtWidgets.QMessageBox.about(self, "Ошибка", "Сначала завершите текущий сеанс")
 
+    def action_3_trigger(self):
+        self.__start_playing_video()
+
+    # Работа с графиком
     @pyqtSlot(dict, int)
     def set_statistic(self, total_visits: dict, count_frames: int):
         self.ui.MplWidget.canvas.axes.clear()
