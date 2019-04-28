@@ -67,7 +67,7 @@ class Ui_MainWindow(object):
         self.radioButton.setText(_translate("MainWindow", "Веб-камера"))
         self.pushButton_2.setText(_translate("MainWindow", "Открыть"))
         self.checkBox.setText(_translate("MainWindow", "Сохранить результат"))
-        self.pushButton_3.setText(_translate("MainWindow", "Открыть"))
+        self.pushButton_3.setText(_translate("MainWindow", "Сохранить"))
         self.pushButton.setText(_translate("MainWindow", "Применить"))
 
 

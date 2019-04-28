@@ -2,10 +2,13 @@
 import sys
 import os
 # Импортируем наш интерфейс из файла
+from enum import Enum
+
+from VideoState import VideoState
 from view import MainWindow, OpenSaveWindow, SettingsWindow
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import qApp, QFileDialog, QStyleFactory
-from PyQt5.QtGui import QTextCursor, QImage, QPixmap, QStandardItemModel
+from PyQt5.QtWidgets import qApp, QFileDialog, QStyleFactory, QColorDialog
+from PyQt5.QtGui import QTextCursor, QImage, QPixmap, QStandardItemModel, QColor
 from PyQt5.QtCore import pyqtSlot, Qt
 from settings import Settings
 from ThreadVideo import Thread
@@ -22,6 +25,8 @@ class STGWindow(QtWidgets.QMainWindow):
         self.ui = SettingsWindow.Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.color = QColor()
+
         self.parent_settings = parent_settings
         self.settings = Settings('config/settings.json')
         self.settings.load_json()
@@ -30,11 +35,14 @@ class STGWindow(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.apply)
         self.ui.pushButton_3.clicked.connect(self.ok)
         self.ui.pushButton_4.clicked.connect(self.rollback)
+        self.ui.pushButton_5.clicked.connect(self.select_color)
+        self.ui.pushButton_6.clicked.connect(self.apply_all)
 
         self.ui.checkBox.stateChanged.connect(self.change_enabled)
         self.ui.spinBox.valueChanged.connect(self.change_border_size)
         self.ui.spinBox_2.valueChanged.connect(self.change_text_size)
         self.ui.doubleSpinBox.valueChanged.connect(self.change_confidence)
+        self.ui.lineEdit.textChanged.connect(self.change_color)
 
         self.ui.listWidget.itemClicked.connect(self.list_select)
         for dct in self.settings.CLASSES:
@@ -42,6 +50,29 @@ class STGWindow(QtWidgets.QMainWindow):
 
         self.ui.listWidget.setCurrentRow(0)
         self.list_select(self.ui.listWidget.currentItem())
+
+    def apply_all(self):
+        rgb = self.color.getRgb()
+        for info in self.settings.CLASSES:
+            info['color'] = [rgb[0], rgb[1], rgb[2]]
+            info['confidence'] = self.ui.doubleSpinBox.value()
+            info['border_size'] = self.ui.spinBox.value()
+            info['text_size'] = self.ui.spinBox_2.value()
+            info['enabled'] = self.ui.checkBox.isChecked()
+
+    def change_color(self, value):
+        invert = QColor(255, 255, 255)
+        invert.setRgb(invert.rgb()-self.color.rgb())
+        self.ui.lineEdit.setStyleSheet("QWidget { background-color: %s; color: %s}" % (self.color.name(), invert.name()))
+
+        name = self.ui.listWidget.currentItem().text()
+        info = self.settings.getClassFromName(name)
+        rgb = self.color.getRgb()
+        info['color'] = [rgb[0], rgb[1], rgb[2]]
+
+    def select_color(self):
+        self.color = QColorDialog.getColor()
+        self.ui.lineEdit.setText(self.color.name())
 
     def change_confidence(self, value):
         name = self.ui.listWidget.currentItem().text()
@@ -82,6 +113,11 @@ class STGWindow(QtWidgets.QMainWindow):
         self.ui.spinBox_2.setValue(info['text_size'])
         self.ui.doubleSpinBox.setValue(info['confidence'])
 
+
+        self.color = QColor(info['color'][0], info['color'][1], info['color'][2])
+        self.ui.lineEdit.setText(self.color.name())
+
+
 #
 # Класс начальных параметров программы
 #
@@ -98,13 +134,27 @@ class OSWindow(QtWidgets.QMainWindow):
         self.ui.lineEdit.setEnabled(False)
         self.ui.pushButton_2.clicked.connect(self.loadfile)
         self.ui.pushButton_3.clicked.connect(self.savefile)
-        self.ui.radioButton.clicked.connect(self.radiobutton1)
-        self.ui.radioButton_2.clicked.connect(self.radiobutton2)
+        self.ui.radioButton.toggled.connect(self.radiobutton1)
+        self.ui.radioButton_2.toggled.connect(self.radiobutton2)
         self.ui.checkBox.stateChanged.connect(self.checkbutton)
-        self.pathOpen = 0
+        self.pathOpen = None
         self.pathSave = None
         self.ui.pushButton.clicked.connect(self.accept)
         self.callback = callback
+
+        self.settings = Settings('config/settings.json')
+        self.settings.load_json()
+        self.load_settings()
+
+    def load_settings(self):
+        parameters = self.settings.PARAMETERS
+        if parameters.get('is_vebcam'):
+            self.ui.radioButton.setChecked(True)
+        else:
+            self.ui.radioButton_2.setChecked(True)
+        self.ui.checkBox.setChecked(parameters.get('is_save'))
+        self.ui.lineEdit.setText(parameters.get('path_open'))
+        self.ui.lineEdit_2.setText(parameters.get('path_save'))
 
     def radiobutton1(self):
         self.ui.pushButton_2.setEnabled(False)
@@ -117,7 +167,6 @@ class OSWindow(QtWidgets.QMainWindow):
         self.vebcam = False
 
     def loadfile(self):
-        print(1)
         self.pathOpen = QFileDialog.getOpenFileName(self, 'Open file', os.getcwd()+'/video', "Video files (*.mp4 *.avi)")[0]
         self.ui.lineEdit.setText(self.pathOpen)
 
@@ -126,11 +175,19 @@ class OSWindow(QtWidgets.QMainWindow):
         self.ui.lineEdit_2.setText(self.pathSave)
 
     def accept(self):
-        self.callback(pathOpen=self.pathOpen, pathSave=self.pathSave, vebcam=self.vebcam, save=self.ui.checkBox.isChecked())
+        self.settings.PARAMETERS['is_vebcam'] = self.ui.radioButton.isChecked()
+        self.settings.PARAMETERS['is_save'] = self.ui.checkBox.isChecked()
+        self.settings.PARAMETERS['path_open'] = self.ui.lineEdit.text()
+        self.settings.PARAMETERS['path_save'] = self.ui.lineEdit_2.text()
+
+        self.settings.save_json()
+
+        self.callback(pathOpen=self.ui.lineEdit.text(), pathSave=self.ui.lineEdit_2.text(), vebcam=self.vebcam, save=self.ui.checkBox.isChecked())
         self.close()
 
-    def checkbutton(self, int):
-        if self.ui.checkBox.isChecked():
+    def checkbutton(self, state):
+        #self.ui.checkBox.isChecked()
+        if state:
             self.ui.pushButton_3.setEnabled(True)
             self.ui.lineEdit_2.setEnabled(True)
         else:
@@ -141,10 +198,6 @@ class OSWindow(QtWidgets.QMainWindow):
 # Класс основного окна программы
 #
 class MyWin(QtWidgets.QMainWindow):
-
-    VIDEO_START = 0
-    VIDEO_PAUSE = 1
-    VIDEO_STOP = 2
 
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -188,18 +241,19 @@ class MyWin(QtWidgets.QMainWindow):
         self.pathSave = None
         self.vebcam = None
         self.isSave = None
-        self.stateVideo = 0
+        self.stateVideo = VideoState.VIDEO_STOP
         self.prototx = 'config/MobileNetSSD_deploy.prototxt.txt'
         self.caffemodel = 'config/MobileNetSSD_deploy.caffemodel'
+        self.action_trigger()
 
     def button_pause(self):
-        self.stateVideo = 2
+        self.stateVideo = VideoState.VIDEO_PAUSE
 
     def button_play(self):
         self.__start_playing_video()
 
     def button_stop(self):
-        self.stateVideo = 0
+        self.stateVideo = VideoState.VIDEO_STOP
 
     @pyqtSlot()
     def clear_image(self):
@@ -210,13 +264,13 @@ class MyWin(QtWidgets.QMainWindow):
         self.myapp.show()
 
     def __start_playing_video(self):
-        if self.stateVideo == 0:
+        if self.stateVideo == VideoState.VIDEO_STOP:
             if not self.pathOpen and not self.vebcam:
                 QtWidgets.QMessageBox.about(self, "Ошибка", "Не указан источник")
                 return
-            self.stateVideo = 1
+            self.stateVideo = VideoState.VIDEO_START
 
-            self.th = Thread(self.prototx, self.caffemodel, self.pathOpen, self.pathSave, self.settings, self)
+            self.th = Thread(self.prototx, self.caffemodel, self.pathOpen if not self.vebcam else 0, self.pathSave, self.settings, self)
             self.th.changePixmap.connect(self.set_image)
             self.th.printLog.connect(self.print_log)
             self.th.changeStatic.connect(self.set_statistic)
@@ -225,8 +279,9 @@ class MyWin(QtWidgets.QMainWindow):
             self.th.start()
             self.moveToThread(self.th)
 
-        else:
-            QtWidgets.QMessageBox.about(self, "Ошибка", "Сначала завершите текущий сеанс")
+        elif self.stateVideo == VideoState.VIDEO_PAUSE:
+            self.stateVideo = VideoState.VIDEO_START
+            # QtWidgets.QMessageBox.about(self, "Ошибка", "Сначала завершите текущий сеанс")
 
     def action_3_trigger(self):
         self.__start_playing_video()

@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from PyQt5.QtGui import QImage, QPixmap
@@ -5,6 +6,8 @@ from PyQt5.QtCore import pyqtSignal, QThread, Qt
 import cv2
 import time
 import numpy as np
+
+from VideoState import VideoState
 from settings import Settings
 
 
@@ -51,7 +54,7 @@ class Thread(QThread):
 
         while cap.isOpened():
 
-            if self.parent().stateVideo == 1 and self.parent().accessLabelVideo:
+            if self.parent().stateVideo == VideoState.VIDEO_START and self.parent().accessLabelVideo:
                 ret, frame = cap.read()
                 if ret:
                     self.parent().accessLabelVideo = False
@@ -74,8 +77,10 @@ class Thread(QThread):
                         idx = int(detections[0, 0, i, 1])
                         try:
                             if self.CLASSES[idx].get('enabled') and self.CLASSES[idx].get('confidence') < confidence:
-                                name = self.CLASSES[idx].get('name')
-                                color = self.CLASSES[idx].get('color')
+
+                                name, color = self.CLASSES[idx].get('name'), list(reversed(self.CLASSES[idx].get('color')))
+
+                                self.printLog.emit("[%s] Найден объект: \"%s\" " % (datetime.datetime.now().strftime('%H:%M:%S'), name), False)
                                 self.total_counts[name]['counts'][-1] += 1
                                 box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
                                 (startX, startY, endX, endY) = box.astype("int")
@@ -100,7 +105,7 @@ class Thread(QThread):
                     self.changeStatic.emit(self.total_counts, count_frames)
                     self.changePixmap.emit(p)
 
-            elif self.parent().stateVideo == 0:
+            elif self.parent().stateVideo == VideoState.VIDEO_STOP:
                 self.clearPixmap.emit()
                 break
 
