@@ -1,9 +1,9 @@
 {
     "parameters": {
-        "is_vebcam": true,
-        "path_open": "",
-        "path_save": "",
-        "is_save": false
+        "is_vebcam": false,
+        "path_open": "/home/user/\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0438/[4k] New York Quick Walk Empire State Building to CC-Central Park.mp4",
+        "path_save": "/home/user/Projects/AIVisoin/video/s.mp4",
+        "is_save": true
     },
     "settings": {
         "overlay_frequency": 1,
@@ -11,86 +11,86 @@
         "CLASSES": [
             {
                 "name": "background",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "aeroplane",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "bicycle",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "bird",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "boat",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "bottle",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "bus",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
@@ -98,95 +98,95 @@
                 "border_size": 2,
                 "text_size": 2,
                 "color": [
-                    209,
-                    255,
-                    139
+                    204,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.7,
                 "enabled": true
             },
             {
                 "name": "cat",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "chair",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "cow",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "diningtable",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "dog",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
                 "confidence": 0.8,
                 "enabled": true
             },
             {
                 "name": "horse",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "motorbike",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
@@ -194,69 +194,69 @@
                 "border_size": 2,
                 "text_size": 2,
                 "color": [
-                    209,
-                    255,
-                    139
+                    237,
+                    212,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.6,
                 "enabled": true
             },
             {
                 "name": "pottedplant",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "sheep",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "sofa",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "train",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
-                "confidence": 0.8,
+                "confidence": 0.8000000000000002,
                 "enabled": true
             },
             {
                 "name": "tvmonitor",
-                "border_size": 2,
-                "text_size": 2,
+                "border_size": 1,
+                "text_size": 1,
                 "color": [
-                    209,
-                    255,
-                    139
+                    0,
+                    0,
+                    0
                 ],
                 "confidence": 0.8,
                 "enabled": true

@@ -20,6 +20,8 @@ class Thread(QThread):
     prototxt = None
     size_text = None
 
+
+
     def __init__(self, prototxt: str, model: str, pathopen: str, pathsave: str, settings: Settings, *args):
         super(Thread, self).__init__(*args)
 
@@ -38,6 +40,7 @@ class Thread(QThread):
 
         self.printLog.emit("[INFO] Инициализация видеопотока...", False)
         cap = cv2.VideoCapture(self.pathopen)
+        resolution_frame = {480: 5, 720: 15}
 
         count_frames = 0
         currient_overlay_frequency = 0
@@ -50,7 +53,9 @@ class Thread(QThread):
                 fourcc = cv2.VideoWriter_fourcc(*'XVID')
             elif format == '.mp4':
                 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-            out = cv2.VideoWriter(self.pathsave, fourcc, 5, (frame_width, frame_height))
+
+            self.printLog.emit("[INFO] Разрешение %s/%s" % (frame_width, frame_height), False)
+            out = cv2.VideoWriter(self.pathsave, fourcc, resolution_frame.get(frame_height, 5), (frame_width, frame_height))
 
         while cap.isOpened():
 
