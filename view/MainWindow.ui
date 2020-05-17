@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>735</width>
-    <height>575</height>
+    <width>1000</width>
+    <height>700</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>700</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Traffic Viewer</string>
@@ -20,36 +26,23 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::TabFocus</enum>
+      </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Статистика</string>
+        <string>Statistic</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="QFrame" name="frame">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="MplWidget" name="MplWidget" native="true">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
         <item row="0" column="1">
          <widget class="QTreeView" name="treeView">
           <property name="sizePolicy">
@@ -63,11 +56,72 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::NoContextMenu</enum>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetNoConstraint</enum>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="MplWidget" name="MplWidget" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>Видео</string>
+        <string>Stream</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
@@ -133,7 +187,7 @@
         </sizepolicy>
        </property>
        <attribute name="title">
-        <string>Лог</string>
+        <string>Logs</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -209,7 +263,13 @@
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>icons8-pause-48.png</normaloff>icons8-pause-48.png</iconset>
+           <normaloff>resources/icons8-pause-48.png</normaloff>resources/icons8-pause-48.png</iconset>
+         </property>
+         <property name="autoRepeat">
+          <bool>false</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -223,7 +283,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>icons8-play-48.png</normaloff>icons8-play-48.png</iconset>
+           <normaloff>resources/icons8-play-48.png</normaloff>resources/icons8-play-48.png</iconset>
          </property>
         </widget>
        </item>
@@ -234,7 +294,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>icons8-stop-48.png</normaloff>icons8-stop-48.png</iconset>
+           <normaloff>resources/icons8-stop-48.png</normaloff>resources/icons8-stop-48.png</iconset>
          </property>
         </widget>
        </item>
@@ -249,13 +309,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>735</width>
-     <height>21</height>
+     <width>1000</width>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>Файл</string>
+     <string>File</string>
     </property>
     <addaction name="action"/>
     <addaction name="action_5"/>
@@ -264,7 +324,7 @@
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
-     <string>Начать</string>
+     <string>Run</string>
     </property>
     <addaction name="action_3"/>
    </widget>
@@ -273,22 +333,22 @@
   </widget>
   <action name="action">
    <property name="text">
-    <string>Параметры</string>
+    <string>Parameters</string>
    </property>
   </action>
   <action name="action_2">
    <property name="text">
-    <string>Выход</string>
+    <string>Exit</string>
    </property>
   </action>
   <action name="action_3">
    <property name="text">
-    <string>Старт</string>
+    <string>Start</string>
    </property>
   </action>
   <action name="action_5">
    <property name="text">
-    <string>Настройки</string>
+    <string>Settings</string>
    </property>
   </action>
  </widget>

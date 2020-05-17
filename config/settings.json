@@ -1,9 +1,9 @@
 {
     "parameters": {
-        "is_vebcam": false,
+        "is_vebcam": true,
         "path_open": "/home/user/\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0438/[4k] New York Quick Walk Empire State Building to CC-Central Park.mp4",
         "path_save": "/home/user/Projects/AIVisoin/video/s.mp4",
-        "is_save": true
+        "is_save": false
     },
     "settings": {
         "overlay_frequency": 1,

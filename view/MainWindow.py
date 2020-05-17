@@ -1,43 +1,37 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'MainWindow.ui'
+# Form implementation generated from reading ui file 'view\MainWindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(735, 575)
+        MainWindow.resize(1000, 700)
+        MainWindow.setMinimumSize(QtCore.QSize(1000, 700))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
         self.tabWidget_2 = QtWidgets.QTabWidget(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tabWidget_2.sizePolicy().hasHeightForWidth())
+        self.tabWidget_2.setSizePolicy(sizePolicy)
+        self.tabWidget_2.setFocusPolicy(QtCore.Qt.TabFocus)
         self.tabWidget_2.setObjectName("tabWidget_2")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.tab_3)
         self.gridLayout_4.setObjectName("gridLayout_4")
-        self.frame = QtWidgets.QFrame(self.tab_3)
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.MplWidget = MplWidget(self.frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.MplWidget.sizePolicy().hasHeightForWidth())
-        self.MplWidget.setSizePolicy(sizePolicy)
-        self.MplWidget.setObjectName("MplWidget")
-        self.horizontalLayout_2.addWidget(self.MplWidget)
-        self.gridLayout_4.addWidget(self.frame, 0, 0, 1, 1)
         self.treeView = QtWidgets.QTreeView(self.tab_3)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -47,6 +41,33 @@ class Ui_MainWindow(object):
         self.treeView.setAnimated(False)
         self.treeView.setObjectName("treeView")
         self.gridLayout_4.addWidget(self.treeView, 0, 1, 1, 1)
+        self.frame = QtWidgets.QFrame(self.tab_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
+        self.frame.setSizePolicy(sizePolicy)
+        self.frame.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
+        self.frame.setAutoFillBackground(False)
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.gridLayout_5 = QtWidgets.QGridLayout(self.frame)
+        self.gridLayout_5.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
+        self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_5.setSpacing(0)
+        self.gridLayout_5.setObjectName("gridLayout_5")
+        self.MplWidget = MplWidget(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.MplWidget.sizePolicy().hasHeightForWidth())
+        self.MplWidget.setSizePolicy(sizePolicy)
+        self.MplWidget.setMinimumSize(QtCore.QSize(100, 100))
+        self.MplWidget.setAutoFillBackground(False)
+        self.MplWidget.setObjectName("MplWidget")
+        self.gridLayout_5.addWidget(self.MplWidget, 0, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.frame, 0, 0, 1, 1)
         self.tabWidget_2.addTab(self.tab_3, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -113,21 +134,23 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.toolButton_2 = QtWidgets.QToolButton(self.widget_2)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./resources/icons8-pause-48.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("view/resources/icons8-pause-48.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_2.setIcon(icon)
+        self.toolButton_2.setAutoRepeat(False)
+        self.toolButton_2.setAutoExclusive(False)
         self.toolButton_2.setObjectName("toolButton_2")
         self.horizontalLayout.addWidget(self.toolButton_2)
         self.toolButton = QtWidgets.QToolButton(self.widget_2)
         self.toolButton.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.toolButton.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("./resources/icons8-play-48.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("view/resources/icons8-play-48.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton.setIcon(icon1)
         self.toolButton.setObjectName("toolButton")
         self.horizontalLayout.addWidget(self.toolButton)
         self.toolButton_3 = QtWidgets.QToolButton(self.widget_2)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("./resources/icons8-stop-48.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("view/resources/icons8-stop-48.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_3.setIcon(icon2)
         self.toolButton_3.setObjectName("toolButton_3")
         self.horizontalLayout.addWidget(self.toolButton_3)
@@ -137,7 +160,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 735, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 18))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -161,26 +184,26 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_3.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Traffic Viewer"))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), _translate("MainWindow", "Статистика"))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), _translate("MainWindow", "Видео"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Лог"))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), _translate("MainWindow", "Statistic"))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), _translate("MainWindow", "Stream"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Logs"))
         self.toolButton_2.setText(_translate("MainWindow", "..."))
         self.toolButton_3.setText(_translate("MainWindow", "..."))
-        self.menu.setTitle(_translate("MainWindow", "Файл"))
-        self.menu_3.setTitle(_translate("MainWindow", "Начать"))
-        self.action.setText(_translate("MainWindow", "Параметры"))
-        self.action_2.setText(_translate("MainWindow", "Выход"))
-        self.action_3.setText(_translate("MainWindow", "Старт"))
-        self.action_5.setText(_translate("MainWindow", "Настройки"))
-
+        self.menu.setTitle(_translate("MainWindow", "File"))
+        self.menu_3.setTitle(_translate("MainWindow", "Run"))
+        self.action.setText(_translate("MainWindow", "Parameters"))
+        self.action_2.setText(_translate("MainWindow", "Exit"))
+        self.action_3.setText(_translate("MainWindow", "Start"))
+        self.action_5.setText(_translate("MainWindow", "Settings"))
 from mplwidget import MplWidget
+
 
 if __name__ == "__main__":
     import sys
@@ -190,4 +213,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-

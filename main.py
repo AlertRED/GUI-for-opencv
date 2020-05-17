@@ -213,14 +213,14 @@ class MyWin(QtWidgets.QMainWindow):
         self.ui.toolButton_3.clicked.connect(self.button_stop)
 
         self.model = QStandardItemModel(0, 2, parent)
-        self.model.setHeaderData(0, Qt.Horizontal, "Объект")
-        self.model.setHeaderData(1, Qt.Horizontal, "Кол-во совпадений")
+        self.model.setHeaderData(0, Qt.Horizontal, "Object")
+        self.model.setHeaderData(1, Qt.Horizontal, "Count")
         self.ui.treeView.setModel(self.model)
         for i in range(22):
             self.model.insertRow(i)
 
         self.ui.MplWidget.canvas.axes.clear()
-        self.ui.MplWidget.canvas.axes.set_title('Суммарное количество')
+        self.ui.MplWidget.canvas.axes.set_title('Summary count')
         self.ui.MplWidget.canvas.axes.set_facecolor('0.93')
         self.ui.MplWidget.canvas.axes.grid(True, color='1.0', linestyle='-')
         self.ui.MplWidget.canvas.axes.spines['top'].set_color('white')
@@ -266,7 +266,7 @@ class MyWin(QtWidgets.QMainWindow):
     def __start_playing_video(self):
         if self.stateVideo == VideoState.VIDEO_STOP:
             if not self.pathOpen and not self.vebcam:
-                QtWidgets.QMessageBox.about(self, "Ошибка", "Не указан источник")
+                QtWidgets.QMessageBox.about(self, "Error", "Source not specified")
                 return
             self.stateVideo = VideoState.VIDEO_START
 
@@ -337,7 +337,7 @@ if __name__ == "__main__":
     # os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = "C:\\Users\\Александр\\PycharmProjects\\diplom\\venv\\Lib\\site-packages\\PyQt5\\Qt\\plugins\\platforms"
     os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = os.getcwd()+"\\venv\\Lib\\site-packages\\PyQt5\\Qt\\plugins\\platforms"
     app = QtWidgets.QApplication(sys.argv)
-    app.setStyle(QStyleFactory.create('Fusion'))
+    app.setStyle(QStyleFactory.create('windowsvista'))
     myapp = MyWin()
     myapp.show()
     sys.exit(app.exec_())
