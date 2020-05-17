@@ -35,10 +35,10 @@ class Thread(QThread):
         self.overlay_frequency = settings.overlay_frequency
 
     def run(self):
-        self.printLog.emit("[INFO] Загрузка моделей...", True)
+        self.printLog.emit("[INFO] Load models", True)
         net = cv2.dnn.readNetFromCaffe(self.prototxt, self.model)
 
-        self.printLog.emit("[INFO] Инициализация видеопотока...", False)
+        self.printLog.emit("[INFO] Initialization video thread", False)
         cap = cv2.VideoCapture(self.pathopen)
         resolution_frame = {480: 5, 720: 15}
 
@@ -54,7 +54,7 @@ class Thread(QThread):
             elif format == '.mp4':
                 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 
-            self.printLog.emit("[INFO] Разрешение %s/%s" % (frame_width, frame_height), False)
+            self.printLog.emit("[INFO] Video resolution %s/%s" % (frame_width, frame_height), False)
             out = cv2.VideoWriter(self.pathsave, fourcc, resolution_frame.get(frame_height, 5), (frame_width, frame_height))
 
         while cap.isOpened():
@@ -85,7 +85,7 @@ class Thread(QThread):
 
                                 name, color = self.CLASSES[idx].get('name'), list(reversed(self.CLASSES[idx].get('color')))
 
-                                self.printLog.emit("[%s] Найден объект: \"%s\" " % (datetime.datetime.now().strftime('%H:%M:%S'), name), False)
+                                self.printLog.emit("[%s] Object discovered: \"%s\" " % (datetime.datetime.now().strftime('%H:%M:%S'), name), False)
                                 self.total_counts[name]['counts'][-1] += 1
                                 box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
                                 (startX, startY, endX, endY) = box.astype("int")

@@ -22,11 +22,11 @@ if __name__ == '__main__':
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
     # загрузить нашу сериализованную модель с диска
-    print("[INFO] Загрузка моделей")
+    print("[INFO] Load models")
     net = cv2.dnn.readNetFromCaffe(args["prototxt"], args["model"])
 
     # инициализируем видео поток
-    print("[INFO] Инициализация видеопотока")
+    print("[INFO] Initialization video thread")
     #vs = VideoStream(src='NYC.mp4').start()
     cap = cv2.VideoCapture('NYC.mp4')
     time.sleep(2.0)

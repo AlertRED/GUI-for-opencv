@@ -194,8 +194,8 @@
                 "border_size": 2,
                 "text_size": 2,
                 "color": [
-                    237,
-                    212,
+                    255,
+                    0,
                     0
                 ],
                 "confidence": 0.6,
